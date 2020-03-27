@@ -2,7 +2,6 @@ import "./TimeZone.scss";
 import React, { useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
 import { TextField } from "@material-ui/core";
-const $ = require("jquery");
 
 interface TimeZoneViewProps {
   data: any;
@@ -10,20 +9,20 @@ interface TimeZoneViewProps {
 
 const TimeZoneView: React.FC<TimeZoneViewProps> = props => {
   useEffect(() => {
-    console.log($("#searchField"));
+    // @ts-ignore
     const search = $("#searchField").omniSearch();
-    const currentDate = new Date();
-    const searchItems = props.data.map((item: any) => {
-      console.log(item);
+    $("#searchField").keydown(() => {
+      search.omniSearch(
+        "open",
+        ["atari", "avocado", "asshat", "arctic"],
+        handleSelect
+      );
     });
-
-    search.omniSearch("open", searchItems, handleSelect);
   }, [props.data]);
-
   return (
     <div>
       <Typography>Please select your time zone.</Typography>
-      <TextField id="searchField"></TextField>
+      <TextField id="searchField" className="omni-search"></TextField>
     </div>
   );
 };
