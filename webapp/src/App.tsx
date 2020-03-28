@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
-import HeaderBar from "./Components/HeaderBar";
-import TimeZone from "./Components/TimeZone";
 import { MuiThemeProvider } from "@material-ui/core/styles";
+import { Router, Switch, Route } from "react-router-dom";
 import { getData } from "./Utils/Database";
+import history from "./Utils/History";
 import Theme from "./Theme/Theme";
+import HomePage from "./Components/HomePage";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
 import "typeface-roboto";
 
 import "./App.scss";
 
-function App() {
+const App: React.FC = props => {
   let parsedData: any;
   let app: any;
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     async function loadData() {
@@ -51,7 +55,7 @@ function App() {
         });
 
         setIsLoaded(true);
-        console.log("loaded data", parsedData);
+        setData(parsedData);
       });
     }
 
@@ -63,15 +67,20 @@ function App() {
   if (isLoaded) {
     app = (
       <MuiThemeProvider theme={Theme}>
-        <HeaderBar />
-        <div className="App">
-          <TimeZone data={parsedData} />
-        </div>
+        <Router history={history}>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/oauth_callback" component={LoginCallback} />
+            <Route path="/home" component={HomePage} />
+          </Switch>
+        </Router>
       </MuiThemeProvider>
     );
   }
 
   return app;
-}
+};
+
+const LoginCallback = () => {};
 
 export default App;

@@ -9,12 +9,14 @@ interface TimeZoneViewProps {
 }
 
 const TimeZoneView: React.FC<TimeZoneViewProps> = props => {
+  if (!props.data) {
+    return null;
+  }
+
   const options = {
     options: props.data,
     getOptionLabel: (option: any) => option.name
   };
-
-  console.log(props, "data");
 
   return (
     <div>
