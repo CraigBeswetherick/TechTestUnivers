@@ -7,6 +7,7 @@ import Theme from "./Theme/Theme";
 import HomePage from "./Components/HomePage";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import Users from "./Components/Users";
 import "typeface-roboto";
 
 import "./App.scss";
@@ -16,7 +17,7 @@ const App: React.FC = props => {
   let app: any;
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     async function loadData() {
@@ -25,8 +26,6 @@ const App: React.FC = props => {
           "%c Server responded with the following data: ",
           "background: #222; color: red; font-size:18px; font-weight: bold; padding:3px 5px;"
         );
-
-        parsedData = [];
 
         results.recordsets[0].forEach((entry: any) => {
           let timezone = {
@@ -69,9 +68,12 @@ const App: React.FC = props => {
       <MuiThemeProvider theme={Theme}>
         <Router history={history}>
           <Switch>
+            <Route exact path="/" component={Login} />
             <Route path="/login" component={Login} />
-            <Route path="/oauth_callback" component={LoginCallback} />
-            <Route path="/home" component={HomePage} />
+            <Route path="/register" component={Register} />
+            <Route path="/home" component={HomePage} data={data} />
+
+            <Route path="/users" component={Users} />
           </Switch>
         </Router>
       </MuiThemeProvider>
