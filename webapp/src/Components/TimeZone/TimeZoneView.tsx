@@ -20,13 +20,12 @@ const TimeZoneView: React.FC<TimeZoneViewProps> = props => {
 
   return (
     <div>
-      <Typography>Please select your time zone.</Typography>
+      <Typography variant="subtitle1">Please select your time zone.</Typography>
       <Autocomplete
         {...options}
-        id="disable-close-on-select"
-        disableCloseOnSelect
+        id="autocomplete"
         renderInput={params => (
-          <TextField {...params} label="disableCloseOnSelect" margin="normal" />
+          <TextField {...params} label="Select your timezone" margin="normal" />
         )}
       />
     </div>

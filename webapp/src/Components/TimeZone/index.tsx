@@ -6,7 +6,6 @@ interface TimeZoneProps {
 }
 
 const TimeZone: React.FC<TimeZoneProps> = props => {
-  console.log(props);
   return <TimeZoneView data={props.data} />;
 };
 

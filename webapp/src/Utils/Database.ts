@@ -1,4 +1,4 @@
-import { SERVER_PATH, SERVER_PORT } from "./Constants";
+import { SQL_SERVER_PATH, SQL_SERVER_PORT } from "./Constants";
 
 export async function getData() {
   const fetchData = {
@@ -7,10 +7,9 @@ export async function getData() {
   };
 
   const response = await fetch(
-    SERVER_PATH + ":" + SERVER_PORT + "/time-zones",
+    SQL_SERVER_PATH + ":" + SQL_SERVER_PORT + "/time-zones",
     fetchData
   );
   const json = await response.json();
-  console.log(json);
   return json;
 }

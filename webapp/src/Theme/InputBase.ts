@@ -1,6 +1,7 @@
 const InputBase = {
   root: {
-    color: "red"
+    color: "red",
+    marginBottom: "3em"
   }
 };
 

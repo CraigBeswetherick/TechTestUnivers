@@ -1,88 +1,51 @@
+"use-strict";
+
 import React, { useState, useEffect } from "react";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Router, Switch, Route } from "react-router-dom";
-import { getData } from "./Utils/Database";
 import history from "./Utils/History";
 import Theme from "./Theme/Theme";
 import HomePage from "./Components/HomePage";
 import Login from "./Components/Login";
-import Register from "./Components/Register";
-import Users from "./Components/Users";
-import "typeface-roboto";
+import { currentUser } from "./Utils/User";
+import { APP_NAME } from "./Utils/Constants";
 
+import "typeface-roboto";
 import "./App.scss";
 
 const App: React.FC = props => {
-  let parsedData: any;
-  let app: any;
+  currentUser.email = localStorage.getItem(APP_NAME + "email") || "";
+  currentUser.accessToken =
+    localStorage.getItem(APP_NAME + "accessToken") || "";
 
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    async function loadData() {
-      await getData().then(function(results) {
-        console.log(
-          "%c Server responded with the following data: ",
-          "background: #222; color: red; font-size:18px; font-weight: bold; padding:3px 5px;"
-        );
-
-        results.recordsets[0].forEach((entry: any) => {
-          let timezone = {
-            name: entry.name,
-            hours: entry.Hours,
-            mins: entry.Mins,
-            secs: entry.Secs
-          };
-
-          parsedData.push(timezone);
-
-          // console.log(
-          //   "%c " +
-          //     entry.name +
-          //     " \n" +
-          //     " Hours : " +
-          //     entry.Hours +
-          //     " \n" +
-          //     " Mins: " +
-          //     entry.Mins +
-          //     " \n" +
-          //     " Secs: " +
-          //     entry.Secs,
-          //   "background: #222; color: white; font-size:12px; font-weight: bold; padding:3px 5px;"
-          // );
-        });
-
-        setIsLoaded(true);
-        setData(parsedData);
-      });
-    }
-
-    loadData();
-  }, [parsedData]);
-
-  app = <div>Loading...</div>;
-  console.log("rendering");
-  if (isLoaded) {
-    app = (
-      <MuiThemeProvider theme={Theme}>
-        <Router history={history}>
-          <Switch>
-            <Route exact path="/" component={Login} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/home" component={HomePage} data={data} />
-
-            <Route path="/users" component={Users} />
-          </Switch>
-        </Router>
-      </MuiThemeProvider>
-    );
+  if (currentUser.email.length > 0) {
+    currentUser.isAuthenticated = true;
   }
 
-  return app;
-};
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    currentUser.isAuthenticated
+  );
 
-const LoginCallback = () => {};
+  return (
+    <MuiThemeProvider theme={Theme}>
+      <Router history={history}>
+        <Switch>
+          {isAuthenticated ? (
+            <Route
+              path="/"
+              render={() => <HomePage authenticate={setIsAuthenticated} />}
+            />
+          ) : (
+            <Route
+              exact
+              path="/"
+              render={() => <Login authenticate={setIsAuthenticated} />}
+            />
+          )}
+        </Switch>
+      </Router>
+    </MuiThemeProvider>
+  );
+};
 
 export default App;

@@ -2,7 +2,15 @@ const Typography = {
   h1: {
     "font-size": "4rem",
     "text-align": "center",
-    margin: "10%"
+    padding: "10%",
+    background: "blue",
+    color: "white"
+  },
+  subtitle1: {
+    "font-size": "2rem",
+    "text-align": "center",
+    padding: "5%",
+    background: "grey"
   }
 };
 
