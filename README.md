@@ -48,6 +48,8 @@ To run the webapp, in the project directory, you can run:
 
 ### `yarn start`
 
+Please note, this app uses a self signed SSL certificate so your browser will display some security errors.
+
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 

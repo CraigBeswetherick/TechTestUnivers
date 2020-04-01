@@ -1,6 +1,6 @@
 "use-strict";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Router, Switch, Route } from "react-router-dom";
 import history from "./Utils/History";
