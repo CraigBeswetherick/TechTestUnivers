@@ -1,8 +1,50 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Installation SQL
 
-In the project directory, you can run:
+Install [Docker](https://store.docker.com/editions/community/docker-ce-desktop-mac)
+
+install the sql server within Docker by running in terminal:
+
+### `sudo docker pull microsoft/mssql-server-linux:2017-latest`
+
+Create the sql server instance with password Password31!
+
+### `sudo docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=YourStrong!Password31!' -p 1401:1433 --name sqlserver1 -d microsoft/mssql-server-linux:2017-latest`
+
+if you want to change the password, edit the above command and change the port or password. The config needs to also be edited within:
+
+sql-server > src > Utils > constants.js
+
+this contains some of the config.
+
+Verify correct installation via
+
+### `docker ps -a`
+
+Next, run
+
+### `node createDatabase.js`
+
+from within the Utils directory. This will create and populate the database with the timestamp information.
+
+## Available Scripts & Installation for API
+
+run
+
+### `yarn install`
+
+within the the sql server directory. Next, run
+
+### `node src/index.js`
+
+To start up the API. You can adjust the ports within the constants file.
+
+## Available Scripts & Installation for webapp
+
+To run the webapp, in the project directory, you can run:
+
+### `yarn install`
 
 ### `yarn start`
 
@@ -11,6 +53,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+You can adjust the config from within
+
+### `Utils/Constants.ts`
+
+To change ports etc.
 
 ### `yarn test`
 
