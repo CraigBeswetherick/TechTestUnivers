@@ -1,3 +1,5 @@
+"use-strict";
+
 const TextField = {
   root: {
     padding: "2%"

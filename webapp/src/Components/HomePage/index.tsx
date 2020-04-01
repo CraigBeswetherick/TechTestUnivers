@@ -1,3 +1,5 @@
+"use-strict";
+
 import React, { useState, useEffect } from "react";
 import HomePageView from "./HomePageView";
 import { getData } from "../../Utils/Database";

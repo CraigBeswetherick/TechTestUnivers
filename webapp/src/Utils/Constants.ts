@@ -1,3 +1,5 @@
+"use-strict";
+
 export const SQL_SERVER_PATH: string = "http://localhost";
 export const SQL_SERVER_PORT: string = "8081";
 

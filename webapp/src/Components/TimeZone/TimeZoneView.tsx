@@ -1,3 +1,5 @@
+"use-strict";
+
 import "./TimeZone.scss";
 import React from "react";
 import Typography from "@material-ui/core/Typography";

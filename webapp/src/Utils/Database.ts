@@ -1,3 +1,5 @@
+"use-strict";
+
 import { SQL_SERVER_PATH, SQL_SERVER_PORT } from "./Constants";
 
 export async function getData() {

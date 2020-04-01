@@ -1,3 +1,5 @@
+"use-strict";
+
 import React from "react";
 import { Typography, Container } from "@material-ui/core";
 import FacebookLogin from "react-facebook-login";

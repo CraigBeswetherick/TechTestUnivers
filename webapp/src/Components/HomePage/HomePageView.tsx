@@ -1,3 +1,5 @@
+"use-strict";
+
 import React from "react";
 import HeaderBar from "../HeaderBar";
 import TimeZone from "../TimeZone";

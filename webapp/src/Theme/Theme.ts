@@ -1,3 +1,5 @@
+"use-strict";
+
 import { createMuiTheme } from "@material-ui/core/styles";
 import FormControl from "./FormControl";
 import Typography from "./Typography";

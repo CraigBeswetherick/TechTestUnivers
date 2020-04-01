@@ -1,3 +1,5 @@
+"use-strict";
+
 const Button = {
   root: {
     backgroundColor: "blue"

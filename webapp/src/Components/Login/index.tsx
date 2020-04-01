@@ -1,3 +1,5 @@
+"use-strict";
+
 import React from "react";
 import LoginView from "./LoginView";
 import { loginUser, logoutUser } from "../../Utils/User";
